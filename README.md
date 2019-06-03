@@ -10,6 +10,8 @@ React Project Template with automated build.
 
 ## Usage
 
+1. npm run build
+
 ## Credits
 
 ## License

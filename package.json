@@ -7,14 +7,20 @@
     "node": "8.11.2"
   },
   "scripts": {
+    "start": "http-server src",
+    "lint": "echo running lint && eslint . --ext .js",
+    "lintfix": "eslint . --fix --ext .js",
     "test": "echo All tests passed && exit 0",
     "build": "echo BUILD OK && exit 0",
-    "prebuild": "npm run version && npm run test",
+    "prebuild": "npm run lint && npm run version && npm run test",
     "version": "node version-check.js"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-plugin-react": "^7.13.0",
+    "http-server": "^0.9.0",
     "semver": "^6.1.1"
   }
 }

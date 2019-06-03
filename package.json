@@ -7,9 +7,9 @@
     "node": "8.11.2"
   },
   "scripts": {
-    "test": "echo \"All tests passed\" && exit 0",
-    "build": "echo \"BUILD OK\" && exit 0",
-    "prebuild": "npm run test",
+    "test": "echo All tests passed && exit 0",
+    "build": "echo BUILD OK && exit 0",
+    "prebuild": "npm run version && npm run test",
     "version": "node version-check.js"
   },
   "author": "",

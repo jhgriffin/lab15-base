@@ -1,3 +1,6 @@
-import * as sayHello from './sayHello.js';
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-window.addEventListener('load', () => {document.getElementById('welcome-message').innerHTML = sayHello.greet('BABEL!');});
+ReactDOM.render(
+    <h1>Hello, REACT23788912</h1>, document.getElementById('app')
+);

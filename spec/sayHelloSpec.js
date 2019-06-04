@@ -1,4 +1,4 @@
-var sayHello = require('../src/sayHello.js');
+var sayHello = require('../src/scripts/sayHello.js');
 
 describe('Greet', () => {
     it('concats Hello and a name', () => expect(sayHello.greet('World')).toEqual('Hello, World'));

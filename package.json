@@ -7,21 +7,30 @@
     "node": "8.11.2"
   },
   "scripts": {
-    "start": "http-server src",
+    "start": "http-server dist",
     "lint": "echo running lint && eslint . --ext .js",
     "lintfix": "eslint . --fix --ext .js",
-    "test": "jasmine",
+    "test": "karma start --singleRun",
     "build": "echo BUILD OK && exit 0",
     "prebuild": "npm run lint && npm run version && npm run test",
-    "version": "node version-check.js"
+    "version": "node version-check.js",
+    "bundle": "webpack"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "clean-webpack-plugin": "^2.0.2",
     "eslint": "^5.16.0",
     "eslint-plugin-react": "^7.13.0",
+    "html-webpack-plugin": "^3.2.0",
     "http-server": "^0.9.0",
     "jasmine": "^3.4.0",
-    "semver": "^6.1.1"
+    "karma": "^4.1.0",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-commonjs": "^1.0.0",
+    "karma-jasmine": "^2.0.1",
+    "semver": "^6.1.1",
+    "webpack": "^4.32.2",
+    "webpack-cli": "^3.3.2"
   }
 }

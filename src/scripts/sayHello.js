@@ -1,4 +1,4 @@
-exports.greet = (name) => { 
+export let greet = (name) => { 
     let returnVal = '';
     if(name == null)
     {

@@ -1,7 +1,3 @@
-var sayHello = require('./sayHello.js');
+import * as sayHello from './sayHello.js';
 
-window.addEventListener('load', () => setWelcomeMessage());
-
-let setWelcomeMessage = () => {
-    document.getElementById('welcome-message').innerHTML = sayHello.greet('WebPack!');
-};
+window.addEventListener('load', () => {document.getElementById('welcome-message').innerHTML = sayHello.greet('BABEL!');});

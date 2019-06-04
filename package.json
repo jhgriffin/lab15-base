@@ -12,13 +12,17 @@
     "lintfix": "eslint . --fix --ext .js",
     "test": "karma start --singleRun",
     "build": "echo BUILD OK && exit 0",
-    "prebuild": "npm run lint && npm run version && npm run test",
+    "prebuild": "npm run lint && npm run version && npm run test && npm run bundle",
     "version": "node version-check.js",
     "bundle": "webpack"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.6",
     "clean-webpack-plugin": "^2.0.2",
     "eslint": "^5.16.0",
     "eslint-plugin-react": "^7.13.0",
@@ -29,8 +33,13 @@
     "karma-chrome-launcher": "^2.2.0",
     "karma-commonjs": "^1.0.0",
     "karma-jasmine": "^2.0.1",
+    "karma-webpack": "^3.0.5",
     "semver": "^6.1.1",
     "webpack": "^4.32.2",
     "webpack-cli": "^3.3.2"
+  },
+  "dependencies": {
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
   }
 }

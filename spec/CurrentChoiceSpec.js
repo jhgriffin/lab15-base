@@ -1,15 +1,15 @@
 import React from 'react';
 import TestUtils from 'react-dom/test-utils';
-import PollQuestion from '../src/components/PollQuestion';
+import CurrentChoice from '../src/components/CurrentChoice';
 import TestWrapper from '../src/components/TestWrapper';
 
-describe('PollQuestion', () => {
+describe('CurrentChoice', () => {
     let component;
-    let expected = 'What is best?';
+    let expected = 'answer';
     beforeEach(()=>{
         component = TestUtils.renderIntoDocument(
             <TestWrapper>
-                <PollQuestion question={expected}/>
+                <CurrentChoice checked={expected}/>
             </TestWrapper>
         );
     });
@@ -18,6 +18,6 @@ describe('PollQuestion', () => {
     });
     it('prints a message', () => {
         let actual = TestUtils.findRenderedDOMComponentWithTag(component, 'div').textContent;
-        expect(actual).toEqual(expected);
+        expect(actual).toEqual('Current Selection: ' + expected);
     });
 });

@@ -9,7 +9,7 @@
   "scripts": {
     "start": "http-server dist",
     "lint": "echo running lint && eslint . --ext .js",
-    "lintfix": "eslint . --fix --ext .js",
+    "fixlint": "eslint . --fix --ext .js",
     "test": "karma start --singleRun",
     "build": "echo BUILD OK && exit 0",
     "prebuild": "npm run lint && npm run version && npm run test && npm run bundle",
@@ -32,8 +32,8 @@
     "karma": "^4.1.0",
     "karma-chrome-launcher": "^2.2.0",
     "karma-commonjs": "^1.0.0",
-    "karma-jasmine": "^2.0.1",
-    "karma-webpack": "^3.0.5",
+    "karma-jasmine": "^1.1.2",
+    "karma-webpack": "^3.0.0",
     "semver": "^6.1.1",
     "webpack": "^4.32.2",
     "webpack-cli": "^3.3.2"

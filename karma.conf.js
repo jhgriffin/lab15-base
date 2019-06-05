@@ -27,14 +27,13 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'spec/**/*Spec.js': ['webpack'],
+      'spec/**/*.js': ['webpack'],
       'src/**/*.js': ['webpack']
     },
 
     //manually added as part of babel lab
     webpack: {
       mode    : 'development',
-      entry   : './src/scripts/app.js',
       module: {
         rules: [{
             test: /.js$/,

@@ -4,17 +4,19 @@ import PollHeader from '../components/PollHeader';
 import PollQuestion from '../components/PollQuestion';
 import PollSubmitButton from '../components/PollSubmitButton';
 import CurrentChoice from '../components/CurrentChoice';
-import data from '../data/data.json';
+import $ from 'jquery';
+import AnswerCheck from '../components/AnswerCheck';
 
 class PollContainer extends React.Component {
     constructor(){
         super();
         this.state = {
-            header: data.poll.header,
-            question: data.poll.questions[0].question,
-            correctAnswer: data.poll.questions[0].correctAnswer,
+            header:'',
+            question: '',
+            correctAnswer: '',
             currentAnswer: '',
-            checkedValue:''
+            checkedValue:'',
+            choices:[]
         };
 
         this.setCheckedValue = this.setCheckedValue.bind(this);
@@ -27,6 +29,41 @@ class PollContainer extends React.Component {
         });
     }
 
+    UNSAFE_componentWillMount() {
+        console.log('componentWillMount()');
+    }
+    componentDidMount(){
+        console.log('componentDidMount');
+        this.serverRequest = 
+            $.get('http://localhost:8080/data/data.json', 
+                function (result) {
+                    let data = result;
+                    this.setState({
+                        header: data.poll.header,
+                        question: data.poll.questions[0].question,
+                        choices: data.poll.questions[0].choices,
+                        correctAnswer: data.poll.questions[0].correctAnswer
+                    });
+                }.bind(this));
+    }
+    UNSAFE_componentWillReceiveProps() {
+        console.log('componentWillReceiveProps()');
+    }
+    shouldComponentUpdate() {
+        console.log('shouldComponentUpdate()');
+        return true;
+    }
+    UNSAFE_componentWillUpdate() {
+        console.log('componentWillUpdate()');
+    }
+    componentDidUpdate() {
+        console.log('componentDidUpdate()');
+        //this.checkAnswer(this.state.checkedValue);
+    }
+    componentWillUnmount() {
+        console.log('componentWillUnmount()');
+    }
+
     render() {
         let rowStyle={
             backgroundColor: '#dadada',
@@ -34,8 +71,6 @@ class PollContainer extends React.Component {
             borderRadius: '6px',
             padding: '10px'
         };
-
-        const choices = data.poll.questions[0].choices;
 
         return(
             <div className="container">
@@ -49,10 +84,13 @@ class PollContainer extends React.Component {
                             <RadioButtonGroup
                                 name='answer'
                                 checkedValue={this.state.checkedValue}
-                                choices={choices} 
+                                choices={this.state.choices} 
                                 onChange={this.setCheckedValue}/>
                             <PollSubmitButton subtmitText="Submit" ></PollSubmitButton>
                             <CurrentChoice checked={this.state.currentAnswer}></CurrentChoice>
+                            <AnswerCheck 
+                                checkedValue={this.state.checkedValue}
+                                correctAnswer={this.state.correctAnswer}/>
                         </form>
                     </div>
                 </div>

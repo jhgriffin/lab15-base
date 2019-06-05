@@ -7,9 +7,10 @@
     "node": "8.11.2"
   },
   "scripts": {
-    "start": "http-server dist",
+    "start": "webpack-dev-server --progress --inline --open",
     "lint": "echo running lint && eslint . --ext .js",
     "fixlint": "eslint . --fix --ext .js",
+    "lintfix": "eslint . --fix --ext .js",
     "test": "karma start --singleRun",
     "build": "echo BUILD OK && exit 0",
     "prebuild": "npm run lint && npm run version && npm run test && npm run bundle",
@@ -23,6 +24,7 @@
     "@babel/preset-env": "^7.4.5",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.6",
+    "bootstrap": "^4.3.1",
     "clean-webpack-plugin": "^2.0.2",
     "eslint": "^5.16.0",
     "eslint-plugin-react": "^7.13.0",
@@ -34,9 +36,11 @@
     "karma-commonjs": "^1.0.0",
     "karma-jasmine": "^1.1.2",
     "karma-webpack": "^3.0.0",
+    "react-bootstrap": "^1.0.0-beta.9",
     "semver": "^6.1.1",
     "webpack": "^4.32.2",
-    "webpack-cli": "^3.3.2"
+    "webpack-cli": "^3.3.2",
+    "webpack-dev-server": "^3.6.0"
   },
   "dependencies": {
     "react": "^16.8.6",

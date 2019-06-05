@@ -4,7 +4,7 @@ class PollSubmitButton extends React.Component {
     render() {
         return(
             <div>
-                <input type="submit" value={this.props.subtmitText}/>
+                <input className="btn btn-success" type="submit" value={this.props.subtmitText}/>
             </div>
         );
     }

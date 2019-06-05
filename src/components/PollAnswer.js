@@ -3,8 +3,8 @@ import React from 'react';
 class PollAnswer extends React.Component {
     render() {
         return(
-            <div>
-                <input type="radio"/>{this.props.answer}
+            <div className="radio">
+                <input type="radio"/><span>{this.props.answer}</span>
             </div>
         );
     }

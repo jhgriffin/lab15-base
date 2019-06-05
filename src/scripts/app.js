@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import SayHello from './SayHello';
+import PollContainer from '../containers/PollContainer';
 
 ReactDOM.render(
-    <SayHello name="world"></SayHello>, document.getElementById('app')
+    <PollContainer></PollContainer>, document.getElementById('app')
 );

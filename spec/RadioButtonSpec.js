@@ -1,12 +1,12 @@
 import React from 'react';
 import TestUtils from 'react-dom/test-utils';
-import PollAnswer from '../src/components/PollAnswer';
+import RadioButton from '../src/components/RadioButtonn';
 
 describe('PollAnswer', () => {
     let component;
     let expected = 'Pizza';
     beforeEach(()=>{
-        component = TestUtils.renderIntoDocument(<PollAnswer answer={expected}/>);
+        component = TestUtils.renderIntoDocument(<RadioButton answer={expected}/>);
     });
     it('renders witout problems', () => {
         expect(component).toEqual(jasmine.anything());

@@ -1,5 +1,5 @@
 import React from 'react';
-import PollAnswer from '../components/PollAnswer';
+import RadioButtonGroup from '../components/RadioButtonGroup';
 import PollHeader from '../components/PollHeader';
 import PollQuestion from '../components/PollQuestion';
 import PollSubmitButton from '../components/PollSubmitButton';
@@ -8,13 +8,20 @@ class PollContainer extends React.Component {
     constructor(){
         super();
         this.state = {
-            header: "Welcome to our question!",
-            question: "What's your favorite pizza?",
-            answer1: "Hawaiin",
-            answer2: "Supreme",
-            answer3: "PepMushroom",
-            correctAnswer: "Initial State correct Answer"
-        }
+            header: 'Welcome to our question!',
+            question: 'What\'s your favorite pizza?',
+            correctAnswer: 'Initial State correct Answer',
+            checkedValue:''
+        };
+
+        this.setCheckedValue = this.setCheckedValue.bind(this);
+    }
+
+    setCheckedValue(value) {
+        this.setState({
+            checkedValue: value
+        });
+        console.log("current choice: " + value);
     }
 
     render() {
@@ -25,6 +32,12 @@ class PollContainer extends React.Component {
             padding: '10px'
         };
 
+        const choices = [
+            {value: 'Tacos', label: 'Tacos'},
+            {value: 'Pizza', label: 'Pizza'},
+            {value: 'Cheese', label: 'Cheese'}
+        ];
+
         return(
             <div className="container">
                 <div className="jumbotron">
@@ -34,9 +47,11 @@ class PollContainer extends React.Component {
                     <div className="col-sm-4 col-sm-offset-4">                        
                         <form>
                             <PollQuestion question={this.state.question}></PollQuestion>
-                            <PollAnswer answer={this.state.answer1}></PollAnswer>
-                            <PollAnswer answer={this.state.answer2}></PollAnswer>
-                            <PollAnswer answer={this.state.answer3}></PollAnswer>
+                            <RadioButtonGroup
+                                name='answer'
+                                checkedValue={this.state.checkedValue}
+                                choices={choices} 
+                                onChange={this.setCheckedValue}/>
                             <PollSubmitButton subtmitText="Submit" ></PollSubmitButton>
                         </form>
                     </div>

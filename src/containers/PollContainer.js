@@ -11,14 +11,11 @@ class PollContainer extends React.Component {
     constructor(){
         super();
         this.state = {
-            header:'',
-            question: '',
-            correctAnswer: '',
             currentAnswer: '',
-            checkedValue:'',
-            choices:[]
+            checkedValue:[],
+            header:'',
+            questions:[]
         };
-
         this.setCheckedValue = this.setCheckedValue.bind(this);
     }
 
@@ -34,9 +31,6 @@ class PollContainer extends React.Component {
         alert('submit');
     }
 
-    UNSAFE_componentWillMount() {
-        console.log('componentWillMount()');
-    }
     componentDidMount(){
         console.log('componentDidMount');
         this._isMounted = true;
@@ -47,29 +41,10 @@ class PollContainer extends React.Component {
                     if(this._isMounted) {
                         this.setState({
                             header: data.poll.header,
-                            question: data.poll.questions[0].question,
-                            choices: data.poll.questions[0].choices,
-                            correctAnswer: data.poll.questions[0].correctAnswer
+                            questions: data.poll.questions
                         });
                     }
                 }.bind(this));
-    }
-    UNSAFE_componentWillReceiveProps() {
-        console.log('componentWillReceiveProps()');
-    }
-    shouldComponentUpdate() {
-        console.log('shouldComponentUpdate()');
-        return true;
-    }
-    UNSAFE_componentWillUpdate() {
-        console.log('componentWillUpdate()');
-    }
-    componentDidUpdate() {
-        console.log('componentDidUpdate()');
-        //this.checkAnswer(this.state.checkedValue);
-    }
-    componentWillUnmount() {
-        //console.log('componentWillUnmount()');
     }
 
     render() {
@@ -80,6 +55,24 @@ class PollContainer extends React.Component {
             padding: '10px'
         };
 
+        let radioGroups = this.state.questions.map((question) => {
+            return(
+            <div>
+                <PollQuestion question={question.question}></PollQuestion>
+                <RadioButtonGroup
+                name='answer'
+                checkedValue={this.state.checkedValue}
+                choices={question.choices} 
+                onChange={this.setCheckedValue}/>
+                <PollSubmitButton handleClick={this.submitClickHandle.bind(this)} subtmitText="Go!" ></PollSubmitButton>
+                <CurrentChoice checked={this.state.currentAnswer}></CurrentChoice>
+                <AnswerCheck 
+                checkedValue={this.state.checkedValue}
+                correctAnswer={question.correctAnswer}/>
+            </div>
+            )
+        });
+
         return(
             <div className="container">
                 <div className="jumbotron">
@@ -87,19 +80,7 @@ class PollContainer extends React.Component {
                 </div>
                 <div className="row" style={rowStyle}>
                     <div className="col-sm-4 col-sm-offset-4">                        
-                        <form>
-                            <PollQuestion question={this.state.question}></PollQuestion>
-                            <RadioButtonGroup
-                                name='answer'
-                                checkedValue={this.state.checkedValue}
-                                choices={this.state.choices} 
-                                onChange={this.setCheckedValue}/>
-                            <PollSubmitButton handleClick={this.submitClickHandle.bind(this)} subtmitText="Go!" ></PollSubmitButton>
-                            <CurrentChoice checked={this.state.currentAnswer}></CurrentChoice>
-                            <AnswerCheck 
-                                checkedValue={this.state.checkedValue}
-                                correctAnswer={this.state.correctAnswer}/>
-                        </form>
+                        {radioGroups}
                     </div>
                 </div>
             </div>

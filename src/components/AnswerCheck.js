@@ -1,7 +1,13 @@
 import React from 'react';
 
 function AnswerCheck(props) {
-    return(<div>{props.checkedValue === props.correctAnswer ? 'correct':'wrong'}</div>);
+    let answer = '';
+
+    if(props.checkedValue !== ''){
+        answer = (props.checkedValue === props.correctAnswer) ? 'correct':'wrong';
+    }
+
+    return(<div>{answer}</div>);   
 }
 
 export default AnswerCheck;

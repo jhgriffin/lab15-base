@@ -29,21 +29,29 @@ class PollContainer extends React.Component {
         });
     }
 
+    submitClickHandle(event) {
+        event.preventDefault();
+        alert('submit');
+    }
+
     UNSAFE_componentWillMount() {
         console.log('componentWillMount()');
     }
     componentDidMount(){
         console.log('componentDidMount');
+        this._isMounted = true;
         this.serverRequest = 
             $.get('http://localhost:8080/data/data.json', 
                 function (result) {
                     let data = result;
-                    this.setState({
-                        header: data.poll.header,
-                        question: data.poll.questions[0].question,
-                        choices: data.poll.questions[0].choices,
-                        correctAnswer: data.poll.questions[0].correctAnswer
-                    });
+                    if(this._isMounted) {
+                        this.setState({
+                            header: data.poll.header,
+                            question: data.poll.questions[0].question,
+                            choices: data.poll.questions[0].choices,
+                            correctAnswer: data.poll.questions[0].correctAnswer
+                        });
+                    }
                 }.bind(this));
     }
     UNSAFE_componentWillReceiveProps() {
@@ -61,7 +69,7 @@ class PollContainer extends React.Component {
         //this.checkAnswer(this.state.checkedValue);
     }
     componentWillUnmount() {
-        console.log('componentWillUnmount()');
+        //console.log('componentWillUnmount()');
     }
 
     render() {
@@ -86,7 +94,7 @@ class PollContainer extends React.Component {
                                 checkedValue={this.state.checkedValue}
                                 choices={this.state.choices} 
                                 onChange={this.setCheckedValue}/>
-                            <PollSubmitButton subtmitText="Submit" ></PollSubmitButton>
+                            <PollSubmitButton handleClick={this.submitClickHandle.bind(this)} subtmitText="Go!" ></PollSubmitButton>
                             <CurrentChoice checked={this.state.currentAnswer}></CurrentChoice>
                             <AnswerCheck 
                                 checkedValue={this.state.checkedValue}

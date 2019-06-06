@@ -19,10 +19,16 @@ class PollContainer extends React.Component {
         this.setCheckedValue = this.setCheckedValue.bind(this);
     }
 
-    setCheckedValue(value) {
+    setCheckedValue(name, value) {
+        // this.setState({
+        //     checkedValue: value,
+        //     currentAnswer: value
+        // });
+        let newChecked = this.state.checkedValue;
+        newChecked[name] = value;
+
         this.setState({
-            checkedValue: value,
-            currentAnswer: value
+            checkedValue: newChecked
         });
     }
 
@@ -55,22 +61,22 @@ class PollContainer extends React.Component {
             padding: '10px'
         };
 
-        let radioGroups = this.state.questions.map((question) => {
+        let radioGroups = this.state.questions.map((question,index) => {
             return(
-            <div>
-                <PollQuestion question={question.question}></PollQuestion>
-                <RadioButtonGroup
-                name='answer'
-                checkedValue={this.state.checkedValue}
-                choices={question.choices} 
-                onChange={this.setCheckedValue}/>
-                <PollSubmitButton handleClick={this.submitClickHandle.bind(this)} subtmitText="Go!" ></PollSubmitButton>
-                <CurrentChoice checked={this.state.currentAnswer}></CurrentChoice>
-                <AnswerCheck 
-                checkedValue={this.state.checkedValue}
-                correctAnswer={question.correctAnswer}/>
-            </div>
-            )
+                <div key={`question-number-${index}`}>
+                    <PollQuestion question={question.question}></PollQuestion>
+                    <RadioButtonGroup
+                        name={index}
+                        checkedValue={this.state.checkedValue[index]}
+                        choices={question.choices} 
+                        onChange={this.setCheckedValue}/>
+                    <PollSubmitButton handleClick={this.submitClickHandle.bind(this)} subtmitText="Go!" ></PollSubmitButton>
+                    <CurrentChoice checked={this.state.checkedValue[index]}></CurrentChoice>
+                    <AnswerCheck 
+                        checkedValue={this.state.checkedValue[index]}
+                        correctAnswer={question.correctAnswer}/>
+                </div>
+            );
         });
 
         return(

@@ -2,36 +2,35 @@ import React from 'react';
 import {shallow} from 'enzyme';
 import PollContainer from '../../containers/PollContainer';
 import $ from 'jquery';
-import { callbackify } from 'util';
 
 describe('PollContainer', () => {
     let wrapper;
     beforeEach(()=>{
         $.get = jest.fn((url, callback) => {
-        let response = {
-            poll:
+            let response = {
+                poll:
                 {
-                    header: "Welcome to the Poll!",
+                    header: 'Welcome to the Poll!',
                     questions : [{
-                        question: "What is  best?",
+                        question: 'What is  best?',
                         choices: [
-                            {value: "Tacos", label: "Tacos"},
-                            {value: "Pizza", label: "Pizza"},
-                            {value: "Cheese", label: "Cheese"}
+                            {value: 'Tacos', label: 'Tacos'},
+                            {value: 'Pizza', label: 'Pizza'},
+                            {value: 'Cheese', label: 'Cheese'}
                         ],
-                        correctAnswer: "Pizza"
+                        correctAnswer: 'Pizza'
                     },
                     {
-                        question: "What's your favorite color?:",
+                        question: 'What\'s your favorite color?:',
                         choices: [
-                            {value: "Orange", label: "Orange"},
-                            {value: "Blue", label: "Blue"}
+                            {value: 'Orange', label: 'Orange'},
+                            {value: 'Blue', label: 'Blue'}
                         ],
-                        correctAnswer: "Blue"
-                        }
+                        correctAnswer: 'Blue'
+                    }
                     ]
                 }
-            }
+            };
             callback(response);
         });
         wrapper = shallow(<PollContainer />);

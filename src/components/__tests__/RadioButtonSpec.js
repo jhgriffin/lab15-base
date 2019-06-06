@@ -1,18 +1,19 @@
 import React from 'react';
-import TestUtils from 'react-dom/test-utils';
-import RadioButton from '../src/components/RadioButton';
+import {shallow} from 'enzyme';
+import RadioButton from '../RadioButton';
 
 describe('PollAnswer', () => {
     let component;
     let expected = 'Pizza';
     beforeEach(()=>{
-        component = TestUtils.renderIntoDocument(<RadioButton label={expected}/>);
+        component = shallow(<RadioButton label={expected}/>);
     });
     it('renders witout problems', () => {
         expect(component).toEqual(jasmine.anything());
     });
     it('prints a message', () => {
-        let actual = TestUtils.findRenderedDOMComponentWithTag(component, 'span').textContent;
+        let actual = component.text();
+        //TestUtils.findRenderedDOMComponentWithTag(component, 'span').textContent;
         expect(actual).toEqual(expected);
     });
 });

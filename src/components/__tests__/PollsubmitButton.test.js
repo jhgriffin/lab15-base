@@ -1,5 +1,4 @@
 import React from 'react';
-import TestWrapper from '../TestWrapper';
 import { shallow } from 'enzyme';
 import PollSubmitButton from '../PollSubmitButton';
 
